@@ -1,4 +1,4 @@
-
+import { Link } from "react-router-dom"
 export default function Login(){
     return(
         <>
@@ -10,7 +10,7 @@ export default function Login(){
                 <button type="submit">login</button>
 
                 <p>dont have a account</p>
-                <a href="">create a account</a>
+                <Link to="/signup">create a account</Link>
             </form>
         </>
     )

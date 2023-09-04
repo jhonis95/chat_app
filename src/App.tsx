@@ -3,6 +3,7 @@ import './App.css'
 import {   Routes,  Route, Navigate} from "react-router-dom";
 import Login from './pages/Login';
 import Home from './pages/Home';
+import SingUp from './pages/SignUp';
 interface protectRouterPros{
   children:JSX.Element,
   login:boolean
@@ -23,8 +24,9 @@ function App() {
   const [login, setLogin] = useState(true)
   return (
         <Routes>
-          <Route path='/'element={<ProtedRouter login={login}><Home/></ProtedRouter>}/>
-          <Route path='/login'element={<Login />}/>
+          <Route path='/' element={<ProtedRouter login={login}><Home/></ProtedRouter>}/>
+          <Route path='/login' element={<Login />}/>
+          <Route path='/signup' element={<SingUp/>}/>
         </Routes>
   )
 }

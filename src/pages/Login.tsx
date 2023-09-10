@@ -1,9 +1,10 @@
 import { useState } from "react"
-import { Link } from "react-router-dom"
+import { Link,Navigate } from "react-router-dom"
 export default function Login(){
 
     const [user, setUser]=useState('');
     const [password,setPassword]=useState('')
+    const [loginStatus,setloginStatus]=useState()
     function handleSubmit(event:any){
         event.preventDefault()
         const data={
@@ -23,7 +24,11 @@ export default function Login(){
         }).then((res:any)=>{
             return res.json()
         }).then((data)=>{
-            console.log(JSON.stringify(data))
+            if(data.authSucess===true){
+                return <Navigate to="/"/>
+            }else{
+                setloginStatus(data.msg)
+            }
         })
     }
     return(
@@ -34,6 +39,8 @@ export default function Login(){
                 <label htmlFor="password">password</label>
                 <input type="text" name="password" id="password" onChange={(e)=>{setPassword(e.currentTarget.value)}}/>
                 <button type="submit" value='login'>login</button>
+
+                <h2>{loginStatus}</h2>
 
                 <p>dont have a account</p>
                 <Link to="/signup">create a account</Link>

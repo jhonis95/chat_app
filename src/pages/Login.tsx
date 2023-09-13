@@ -1,10 +1,19 @@
 import { useState } from "react"
 import { Link,Navigate } from "react-router-dom"
-export default function Login(){
 
+// interface LoginPros{
+//     setlogin: React.Dispatch<React.SetStateAction<any>>
+// }
+export default function Login({setlogin}:{setlogin: React.Dispatch<React.SetStateAction<boolean>>}){
+    setlogin(true)
     const [user, setUser]=useState('');
     const [password,setPassword]=useState('')
     const [loginStatus,setloginStatus]=useState()
+
+    function handleLogin(){
+        setlogin(true)
+    }
+
     function handleSubmit(event:any){
         event.preventDefault()
         const data={
@@ -25,6 +34,8 @@ export default function Login(){
             return res.json()
         }).then((data)=>{
             if(data.authSucess===true){
+                setloginStatus(data.authSucess)
+                handleLogin()
                 return <Navigate to="/"/>
             }else{
                 setloginStatus(data.msg)
@@ -44,6 +55,10 @@ export default function Login(){
 
                 <p>dont have a account</p>
                 <Link to="/signup">create a account</Link>
+
+                {loginStatus===true? (
+                    <Navigate to="/" replace={true} />
+                ):''}
             </form>
         </>
     )

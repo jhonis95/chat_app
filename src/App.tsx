@@ -25,7 +25,7 @@ function App() {
   return (
         <Routes>
           <Route path='/' element={<ProtedRouter login={login}><Home/></ProtedRouter>}/>
-          <Route path='/login' element={<Login />}/>
+          <Route path='/login' element={<Login setlogin={setLogin}/>}/>
           <Route path='/signup' element={<SignUp/>}/>
         </Routes>
   )

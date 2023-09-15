@@ -3,8 +3,9 @@ import { Link,Navigate } from "react-router-dom"
 
 interface LoginPros{
     setlogin: React.Dispatch<React.SetStateAction<boolean>>
+    setSession:React.Dispatch<React.SetStateAction<string>>
 }
-export default function Login({setlogin}:LoginPros){
+export default function Login({setlogin,setSession}:LoginPros){
     const [user, setUser]=useState('');
     const [password,setPassword]=useState('')
     const [loginStatus,setloginStatus]=useState()
@@ -32,6 +33,7 @@ export default function Login({setlogin}:LoginPros){
             if(data.authSucess===true){
                 setloginStatus(data.authSucess)
                 setlogin(true)
+                setSession(data.sessionID)
             }else{
                 setloginStatus(data.msg)
             }

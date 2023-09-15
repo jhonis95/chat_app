@@ -1,18 +1,14 @@
 import { useState } from "react"
 import { Link,Navigate } from "react-router-dom"
 
-// interface LoginPros{
-//     setlogin: React.Dispatch<React.SetStateAction<any>>
-// }
-export default function Login({setlogin}:{setlogin: React.Dispatch<React.SetStateAction<boolean>>}){
-    setlogin(true)
+interface LoginPros{
+    setlogin: React.Dispatch<React.SetStateAction<boolean>>
+}
+export default function Login({setlogin}:LoginPros){
     const [user, setUser]=useState('');
     const [password,setPassword]=useState('')
     const [loginStatus,setloginStatus]=useState()
 
-    function handleLogin(){
-        setlogin(true)
-    }
 
     function handleSubmit(event:any){
         event.preventDefault()
@@ -35,12 +31,14 @@ export default function Login({setlogin}:{setlogin: React.Dispatch<React.SetStat
         }).then((data)=>{
             if(data.authSucess===true){
                 setloginStatus(data.authSucess)
-                handleLogin()
-                return <Navigate to="/"/>
+                setlogin(true)
             }else{
                 setloginStatus(data.msg)
             }
         })
+    }
+    if(loginStatus===true){
+        return <Navigate to="/"/>
     }
     return(
         <>
